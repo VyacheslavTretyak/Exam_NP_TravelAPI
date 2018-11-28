@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace Exam_NP_TravelAPI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+   
     public partial class MainWindow : Window
     {
         public MainWindow()
