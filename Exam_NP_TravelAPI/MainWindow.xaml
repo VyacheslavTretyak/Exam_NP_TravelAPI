@@ -13,8 +13,93 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Travel Tours" Height="450" Width="800">
     <Grid>
-        
-    </Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<materialDesign:ColorZone
+			Grid.Row="0"
+			Mode="PrimaryMid"
+			Padding="16">		
+			<DockPanel>
+				<materialDesign:PopupBox Name="Popup"
+				  DockPanel.Dock="Right"
+				  PlacementMode="BottomAndAlignRightEdges">
+					<ListBox Name="MenuListBox"></ListBox>
+				</materialDesign:PopupBox>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0"
+						FontSize="24"
+						VerticalAlignment="Center"
+						Margin="16 0 0 0">
+						Travel Tours
+					</TextBlock>
+					<TextBlock Name="LoginTextBlock"
+						Grid.Column='1'
+						FontSize="18"
+						VerticalAlignment="Center"
+						HorizontalAlignment="Right"
+						Margin="16 0 0 0">
+						No Signed
+					</TextBlock>
+				</Grid>
+			</DockPanel>
+		</materialDesign:ColorZone>
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<ComboBox Name="ComboBoxCountries"
+				Margin="16 0"
+				Grid.Row="0" Grid.Column="0"
+				materialDesign:HintAssist.Hint="Countries"
+				IsEditable="True"
+				materialDesign:HintAssist.HintOpacity=".26">
+			</ComboBox>
+			<ComboBox Name="ComboBoxCities"
+				Margin="16 0"
+				Visibility="Hidden"
+				Grid.Row="0" Grid.Column="1"
+				materialDesign:HintAssist.Hint="Cities"
+				IsEditable="True"
+				materialDesign:HintAssist.HintOpacity=".26">
+			</ComboBox>
+			<ListView Name="ListHotels"
+				Grid.Row="1" Grid.ColumnSpan="2"
+				Visibility="Hidden"
+				ItemsSource="{Binding Hotels}">				
+				<ListView.View>
+					<GridView>
+						<GridViewColumn
+							DisplayMemberBinding="{Binding id}"
+							Header="Id" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding hotelName}"
+							Header="Hotel" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding cost}"
+							Header="Cost" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding Stars}"
+							Header="Stars" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding info}"
+							Header="Info" />
+					</GridView>
+				</ListView.View>
+			</ListView>
+		</Grid>
+	</Grid>
 </Window>
