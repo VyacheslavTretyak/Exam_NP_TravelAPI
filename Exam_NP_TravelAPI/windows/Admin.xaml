@@ -1,0 +1,138 @@
+﻿<Window x:Class="Exam_NP_TravelAPI.Admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exam_NP_TravelAPI"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Admin Panel" Height="450" Width="800">
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<materialDesign:ColorZone
+			Grid.Row="0"
+			Mode="PrimaryDark"
+			Padding="16">		
+			<DockPanel>				
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0"
+						FontSize="24"
+						VerticalAlignment="Center"
+						Margin="16 0 0 0">
+						Admin Panel						
+					</TextBlock>
+				</Grid>
+			</DockPanel>
+		</materialDesign:ColorZone>
+		<Grid Grid.Row="1">
+		<ScrollViewer>
+		<Grid>			
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			
+			<ListView Name="ListCountries"
+				Grid.Row="0"				
+				ItemsSource="{Binding Countries}">
+				<ListView.View>
+					<GridView>
+						<GridViewColumn
+							DisplayMemberBinding="{Binding Id}"
+							Header="Id" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding CountryName}"
+							Header="Country" />
+					</GridView>
+				</ListView.View>
+			</ListView>
+			<Button Name="AddCountryButton"
+				Grid.Row="1"
+				Width="200"
+				HorizontalAlignment="Left"
+				Margin="16">
+				Add Country
+			</Button>
+			<ListView Name="ListCities"
+				Grid.Row="2"				
+				ItemsSource="{Binding Cities}">
+				<ListView.View>
+					<GridView>
+						<GridViewColumn
+							DisplayMemberBinding="{Binding Id}"
+							Header="Id" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding CityName}"
+							Header="City" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding CountryName}"
+							Header="Country" />					
+					</GridView>
+				</ListView.View>
+			</ListView>
+			<Button Name="AddCitiesButton"
+				Grid.Row="3"
+				Width="200"
+				HorizontalAlignment="Left"
+				Margin="16">
+				Add City
+			</Button>
+			<ListView Name="ListHotels"
+				Grid.Row="4"				
+				ItemsSource="{Binding Hotels}">				
+				<ListView.View>
+					<GridView>
+						<GridViewColumn
+							DisplayMemberBinding="{Binding Id}"
+							Header="Id" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding HotelName}"
+							Header="Hotel" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding Cost}"
+							Header="Cost" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding Stars}"
+							Header="Stars" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding Info}"
+							Header="Info" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding CityName}"
+							Header="City" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding CountryName}"
+							Header="Country" />
+						</GridView>
+				</ListView.View>
+			</ListView>
+			<Button Name="AddHotelButton"
+				Grid.Row="5"
+				Width="200"
+				HorizontalAlignment="Left"
+				Margin="16">
+				Add Hotel
+			</Button>		
+			</Grid>
+		</ScrollViewer>
+		</Grid>
+	</Grid>		
+</Window>

@@ -2,11 +2,11 @@
 {
 	public class Country
 	{
-		public int id;
-		public string countryName;
+		public int Id { get; set; }
+		public string CountryName { get; set; }		
 		public override string ToString()
 		{
-			return countryName;
+			return CountryName;
 		}
 	}
 }

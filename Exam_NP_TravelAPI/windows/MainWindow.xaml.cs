@@ -22,18 +22,17 @@ namespace Exam_NP_TravelAPI
 {	
 	public partial class MainWindow : Window
     {
-		private string responseJson;
-		private string token = "ps_rpo_1";
-		private string api = "http://localhost/apiExem/api.php";
+		public string Token { get; set; } = "ps_rpo_1";
+		public string Api { get; set; } = "http://localhost/apiExem/api.php";
 		private ObservableCollection<Hotel> hotels;
 		private User User { get; set; } = null;
-
+		private string responseJson;
 		public ObservableCollection<Hotel> Hotels
 		{
 			get { return hotels; }
 			set { hotels = value; }
 		}
-		
+
 		public MainWindow()
         {
             InitializeComponent();
@@ -66,6 +65,10 @@ namespace Exam_NP_TravelAPI
 
 		private void MenuListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{			
+			if(MenuListBox.SelectedItem == null)
+			{
+				return;
+			}
 			string s = (MenuListBox.SelectedItem as ListBoxItem).Content.ToString();
 			switch (s)
 			{
@@ -90,7 +93,8 @@ namespace Exam_NP_TravelAPI
 			{
 				return;
 			}
-			MessageBox.Show("admin");
+			Admin adminWnd = new Admin(Api, Token);
+			adminWnd.ShowDialog();
 		}
 
 		private void SignUp()
@@ -101,11 +105,11 @@ namespace Exam_NP_TravelAPI
 			{
 				Response<User> res = Task<Response<User>>.Factory.StartNew(() =>
 				{
-					WebRequest request = WebRequest.Create(api);
+					WebRequest request = WebRequest.Create(Api);
 					request.Method = "POST";
 					string param = "registration";
 					string md5 = CalculateMD5Hash(signUpWnd.Password);					
-					string data = $"token={token}&param={param}&login={signUpWnd.Login}&password={md5}&email={signUpWnd.Email}";
+					string data = $"token={Token}&param={param}&login={signUpWnd.Login}&password={md5}&email={signUpWnd.Email}";
 					byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
 					request.ContentType = "application/x-www-form-urlencoded";
 					request.ContentLength = byteArray.Length;
@@ -160,14 +164,14 @@ namespace Exam_NP_TravelAPI
 			{
 				Response<User> res = Task<Response<User>>.Factory.StartNew(() =>
 				{
-					WebRequest request = WebRequest.Create(api);
+					WebRequest request = WebRequest.Create(Api);
 					request.Method = "POST";
 					string param = "login";
 					string login = "markforest";
 					//TODO hash password
 					//string md5 = CalculateMD5Hash(signInWnd.Password);
 					string md5 = "202cb962ac59075b964b07152d234b70";
-					string data = $"token={token}&param={param}&login={login}&password={md5}";
+					string data = $"token={Token}&param={param}&login={login}&password={md5}";
 					byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
 					request.ContentType = "application/x-www-form-urlencoded";
 					request.ContentLength = byteArray.Length;
@@ -204,7 +208,7 @@ namespace Exam_NP_TravelAPI
 			ListHotels.Visibility = Visibility.Visible;			
 			if (ComboBoxCities.SelectedIndex != -1)
 			{
-				LoadHotels((ComboBoxCities.SelectedItem as City).id);
+				LoadHotels((ComboBoxCities.SelectedItem as City).Id);
 			}
 		}
 
@@ -212,10 +216,10 @@ namespace Exam_NP_TravelAPI
 		{
 			Response<Hotel> res = Task<Response<Hotel>>.Factory.StartNew(() =>
 			{
-				WebRequest request = WebRequest.Create(api);
+				WebRequest request = WebRequest.Create(Api);
 				request.Method = "POST";
 				string param = "getHotels";
-				string data = $"token={token}&param={param}&cityId={cityId}";
+				string data = $"token={Token}&param={param}&cityId={cityId}";
 				byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
 				request.ContentType = "application/x-www-form-urlencoded";
 				request.ContentLength = byteArray.Length;
@@ -258,7 +262,7 @@ namespace Exam_NP_TravelAPI
 			ComboBoxCities.Visibility = Visibility.Visible;
 			ComboBoxCities.Items.Clear();		
 			ListHotels.Visibility = Visibility.Hidden;
-			LoadCities((ComboBoxCountries.SelectedItem as Country).id);
+			LoadCities((ComboBoxCountries.SelectedItem as Country).Id);
 		}
 
 		
@@ -266,10 +270,10 @@ namespace Exam_NP_TravelAPI
 		{
 			Response<City> res = Task<Response<City>>.Factory.StartNew(() =>
 			{
-				WebRequest request = WebRequest.Create(api);
+				WebRequest request = WebRequest.Create(Api);
 				request.Method = "POST";
 				string param = "getCities";
-				string data = $"token={token}&param={param}&countryId={countryId}";
+				string data = $"token={Token}&param={param}&countryId={countryId}";
 				byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
 				request.ContentType = "application/x-www-form-urlencoded";
 				request.ContentLength = byteArray.Length;
@@ -305,10 +309,10 @@ namespace Exam_NP_TravelAPI
 		{
 			Response<Country> res = Task<Response<Country>>.Factory.StartNew(() =>
 			{
-				WebRequest request = WebRequest.Create(api);
+				WebRequest request = WebRequest.Create(Api);
 				request.Method = "POST";
 				string param = "getCountries";
-				string data = $"token={token}&param={param}";
+				string data = $"token={Token}&param={param}";
 				byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
 				request.ContentType = "application/x-www-form-urlencoded";
 				request.ContentLength = byteArray.Length;

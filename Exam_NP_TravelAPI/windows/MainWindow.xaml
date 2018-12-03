@@ -18,7 +18,6 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
 			<RowDefinition/>
-			<RowDefinition/>
 		</Grid.RowDefinitions>
 		<materialDesign:ColorZone
 			Grid.Row="0"
@@ -54,7 +53,7 @@
 		</materialDesign:ColorZone>
 		<Grid Grid.Row="1">
 			<Grid.RowDefinitions>
-				<RowDefinition/>
+				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
@@ -62,14 +61,14 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<ComboBox Name="ComboBoxCountries"
-				Margin="16 0"
+				Margin="16"
 				Grid.Row="0" Grid.Column="0"
 				materialDesign:HintAssist.Hint="Countries"
 				IsEditable="True"
 				materialDesign:HintAssist.HintOpacity=".26">
 			</ComboBox>
 			<ComboBox Name="ComboBoxCities"
-				Margin="16 0"
+				Margin="16"
 				Visibility="Hidden"
 				Grid.Row="0" Grid.Column="1"
 				materialDesign:HintAssist.Hint="Cities"
@@ -83,20 +82,26 @@
 				<ListView.View>
 					<GridView>
 						<GridViewColumn
-							DisplayMemberBinding="{Binding id}"
+							DisplayMemberBinding="{Binding Id}"
 							Header="Id" />
 						<GridViewColumn
-							DisplayMemberBinding="{Binding hotelName}"
+							DisplayMemberBinding="{Binding HotelName}"
 							Header="Hotel" />
 						<GridViewColumn
-							DisplayMemberBinding="{Binding cost}"
+							DisplayMemberBinding="{Binding Cost}"
 							Header="Cost" />
 						<GridViewColumn
 							DisplayMemberBinding="{Binding Stars}"
 							Header="Stars" />
 						<GridViewColumn
-							DisplayMemberBinding="{Binding info}"
+							DisplayMemberBinding="{Binding Info}"
 							Header="Info" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding CityName}"
+							Header="City" />
+						<GridViewColumn
+							DisplayMemberBinding="{Binding CountryName}"
+							Header="Country" />
 					</GridView>
 				</ListView.View>
 			</ListView>

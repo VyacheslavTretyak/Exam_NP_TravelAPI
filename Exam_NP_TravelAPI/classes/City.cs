@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Exam_NP_TravelAPI
 {
-	class City
-	{
-		public int id;
-		public string cityName;
-		public int countryId;
+	public class City
+	{		
+		public int Id { get; set; }
+		public string CityName { get; set; }
+		public int CountryId { get; set; }
+		public string CountryName { get; set; }
 		public override string ToString()
 		{
-			return cityName;
+			return CityName;
 		}
 	}
 }
