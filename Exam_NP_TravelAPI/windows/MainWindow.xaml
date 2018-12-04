@@ -69,7 +69,7 @@
 			</ComboBox>
 			<ComboBox Name="ComboBoxCities"
 				Margin="16"
-				Visibility="Hidden"
+				IsEnabled="False"
 				Grid.Row="0" Grid.Column="1"
 				materialDesign:HintAssist.Hint="Cities"
 				IsEditable="True"

@@ -1,0 +1,101 @@
+﻿<Window x:Class="Exam_NP_TravelAPI.AddHotel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exam_NP_TravelAPI"
+        mc:Ignorable="d"
+		  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"  
+		Title="Add Hotel" Height="681" Width="420" MinHeight="680">
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition/>			
+			<RowDefinition/>			
+			<RowDefinition/>			
+			<RowDefinition/>			
+			<RowDefinition/>			
+			<RowDefinition/>			
+			<RowDefinition/>			
+		</Grid.RowDefinitions>		
+		<materialDesign:ColorZone
+			Grid.Row="0"
+			Mode="PrimaryDark"
+			Padding="16">
+			<DockPanel>				
+				<StackPanel
+					Orientation="Horizontal">
+					<TextBlock FontSize="24"
+						VerticalAlignment="Center"
+						Margin="16 0 0 0">
+						Add Hotel
+					</TextBlock>
+				</StackPanel>
+			</DockPanel>
+		</materialDesign:ColorZone>
+		<TextBox x:Name="HotelNameTextBox"
+			Grid.Row="1"
+			Margin="16"
+			FontSize="24"
+			Height="50"
+			materialDesign:HintAssist.Hint="Hotel Name">			
+		</TextBox>
+		<ComboBox Name="ComboBoxCountries"
+				Margin="16"
+				Grid.Row="2"
+				FontSize="24"
+				materialDesign:HintAssist.Hint="Countries"
+				IsEditable="True"
+				materialDesign:HintAssist.HintOpacity=".26">
+		</ComboBox>
+		<ComboBox Name="ComboBoxCities"
+				Margin="16"
+				Grid.Row="3"
+				FontSize="24"
+				materialDesign:HintAssist.Hint="Cities"
+				IsEditable="True"
+				materialDesign:HintAssist.HintOpacity=".26">
+		</ComboBox>
+		<ComboBox Name="ComboBoxStars"
+			Margin="16"
+			Grid.Row="4"
+			FontSize="24"
+			materialDesign:HintAssist.Hint="Stars"
+			IsEditable="True"
+			materialDesign:HintAssist.HintOpacity=".26">
+			<ComboBoxItem>*</ComboBoxItem>
+			<ComboBoxItem>**</ComboBoxItem>
+			<ComboBoxItem>***</ComboBoxItem>
+			<ComboBoxItem>****</ComboBoxItem>
+			<ComboBoxItem>*****</ComboBoxItem>
+		</ComboBox>
+		<TextBox x:Name="CostTextBox"
+			Grid.Row="5"
+			Margin="16"
+			FontSize="24"
+			Height="50"
+			materialDesign:HintAssist.Hint="Cost">
+		</TextBox>
+		<TextBox x:Name="InfoTextBox"
+			Grid.Row="6"
+			Margin="16"
+			FontSize="24"
+			Height="50"				 
+			materialDesign:HintAssist.Hint="Info" MinLines="3"/>
+		<Button Name="SaveButton"
+			Grid.Row="7"
+			Width="200"
+			Height="50"
+			FontSize="24">
+			Save
+		</Button>
+			
+	</Grid>
+</Window>

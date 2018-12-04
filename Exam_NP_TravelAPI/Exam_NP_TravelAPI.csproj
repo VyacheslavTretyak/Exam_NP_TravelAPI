@@ -67,6 +67,9 @@
     <Compile Include="classes\City.cs" />
     <Compile Include="classes\Hotel.cs" />
     <Compile Include="classes\Response.cs" />
+    <Compile Include="windows\AddHotel.xaml.cs">
+      <DependentUpon>AddHotel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\AddCity.xaml.cs">
       <DependentUpon>AddCity.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,10 @@
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\User.cs" />
+    <Page Include="windows\AddHotel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="windows\AddCity.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

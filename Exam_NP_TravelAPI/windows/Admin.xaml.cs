@@ -52,34 +52,78 @@ namespace Exam_NP_TravelAPI
 
 			ListCountries.SelectionChanged += ListCountries_SelectionChanged;
 			ListCities.SelectionChanged += ListCities_SelectionChanged;
+			ListHotels.SelectionChanged += ListHotels_SelectionChanged;
 			AddCountryButton.Click += AddCountryButton_Click;
 			RemCountryButton.Click += RemCountryButton_Click;
 			AddCityButton.Click += AddCityButton_Click;
 			RemCityButton.Click += RemCityButton_Click;
+			AddHotelButton.Click += AddHotelButton_Click;
+			RemHotelButton.Click += RemHotelButton_Click;
 
 			LoadCountries();
 			LoadCities();
 			LoadHotels();
 		}
 
-		private void ListCities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void RemHotelButton_Click(object sender, RoutedEventArgs e)
 		{
-			RemCityButton.IsEnabled = ListCities.SelectedItem != null;
+			RemoveHotel(ListHotels.SelectedItem as Hotel);
 		}
-
-		private void RemCityButton_Click(object sender, RoutedEventArgs e)
+		private void ListHotels_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			RemoveCity(ListCities.SelectedItem as City);
+			RemHotelButton.IsEnabled = ListHotels.SelectedItem != null;
 		}
-
-		private void RemoveCity(City city)
+		private void RemoveHotel(Hotel hotel)
 		{
-			string jsonData = JsonConvert.SerializeObject(city);
+			string jsonData = JsonConvert.SerializeObject(hotel);
 			Response<Hotel> res = Task<Response<Hotel>>.Factory.StartNew(() =>
 			{
 				WebRequest request = WebRequest.Create(api);
 				request.Method = "POST";
-				string param = "removeCity";
+				string param = "remove";
+				string data = $"token={token}&param={param}&table=hotels&data={jsonData}";
+				byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
+				request.ContentType = "application/x-www-form-urlencoded";
+				request.ContentLength = byteArray.Length;
+				using (Stream dataStream = request.GetRequestStream())
+				{
+					dataStream.Write(byteArray, 0, byteArray.Length);
+				}
+				WebResponse response = request.GetResponse();
+				using (Stream stream = response.GetResponseStream())
+				{
+					using (StreamReader reader = new StreamReader(stream))
+					{
+						responseJson = reader.ReadToEnd();
+					}
+				}
+				response.Close();
+				var obj = JsonConvert.DeserializeObject<Response<Hotel>>(responseJson);
+				return obj;
+			}).Result;
+			if (res.result == 200)
+			{
+				LoadHotels();
+			}
+			else
+			{
+				MessageBox.Show($"HTTP server response: {res.result}");
+			}
+		}
+		private void AddHotelButton_Click(object sender, RoutedEventArgs e)
+		{
+			AddHotel addHotelWnd = new AddHotel(api, token);
+			addHotelWnd.ShowDialog();
+			if (addHotelWnd.DialogResult != true)
+			{
+				return;
+			}
+			string jsonData = JsonConvert.SerializeObject(addHotelWnd.Hotel);
+			Response<Hotel> res = Task<Response<Hotel>>.Factory.StartNew(() =>
+			{
+				WebRequest request = WebRequest.Create(api);
+				request.Method = "POST";
+				string param = "insertHotel";
 				string data = $"token={token}&param={param}&data={jsonData}";
 				byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
 				request.ContentType = "application/x-www-form-urlencoded";
@@ -102,6 +146,51 @@ namespace Exam_NP_TravelAPI
 			}).Result;
 			if (res.result == 200)
 			{
+				LoadHotels();
+			}
+			else
+			{
+				MessageBox.Show($"HTTP server response: {res.result}");
+			}
+		}
+		private void ListCities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			RemCityButton.IsEnabled = ListCities.SelectedItem != null;
+		}
+		private void RemCityButton_Click(object sender, RoutedEventArgs e)
+		{
+			RemoveCity(ListCities.SelectedItem as City);
+		}
+		private void RemoveCity(City city)
+		{
+			string jsonData = JsonConvert.SerializeObject(city);
+			Response<City> res = Task<Response<City>>.Factory.StartNew(() =>
+			{
+				WebRequest request = WebRequest.Create(api);
+				request.Method = "POST";
+				string param = "remove";
+				string data = $"token={token}&param={param}&table=cities&data={jsonData}";
+				byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
+				request.ContentType = "application/x-www-form-urlencoded";
+				request.ContentLength = byteArray.Length;
+				using (Stream dataStream = request.GetRequestStream())
+				{
+					dataStream.Write(byteArray, 0, byteArray.Length);
+				}
+				WebResponse response = request.GetResponse();
+				using (Stream stream = response.GetResponseStream())
+				{
+					using (StreamReader reader = new StreamReader(stream))
+					{
+						responseJson = reader.ReadToEnd();
+					}
+				}
+				response.Close();
+				var obj = JsonConvert.DeserializeObject<Response<City>>(responseJson);
+				return obj;
+			}).Result;
+			if (res.result == 200)
+			{
 				LoadCities();
 			}
 			else
@@ -109,7 +198,6 @@ namespace Exam_NP_TravelAPI
 				MessageBox.Show($"HTTP server response: {res.result}");
 			}
 		}
-
 		private void AddCityButton_Click(object sender, RoutedEventArgs e)
 		{
 			AddCity addCityWnd = new AddCity(api, token);
@@ -153,26 +241,23 @@ namespace Exam_NP_TravelAPI
 				MessageBox.Show($"HTTP server response: {res.result}");
 			}
 		}
-
 		private void RemCountryButton_Click(object sender, RoutedEventArgs e)
 		{
 			RemoveCountry(ListCountries.SelectedItem as Country);
 		}
-
 		private void ListCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			RemCountryButton.IsEnabled = ListCountries.SelectedItem != null;		
 		}
-
 		private void RemoveCountry(Country country)
 		{			
 			string jsonData = JsonConvert.SerializeObject(country);
-			Response<Hotel> res = Task<Response<Hotel>>.Factory.StartNew(() =>
+			Response<Country> res = Task<Response<Country>>.Factory.StartNew(() =>
 			{
 				WebRequest request = WebRequest.Create(api);
 				request.Method = "POST";
-				string param = "removeCountry";
-				string data = $"token={token}&param={param}&data={jsonData}";
+				string param = "remove";
+				string data = $"token={token}&param={param}&table=countries&data={jsonData}";
 				byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
 				request.ContentType = "application/x-www-form-urlencoded";
 				request.ContentLength = byteArray.Length;
@@ -189,7 +274,7 @@ namespace Exam_NP_TravelAPI
 					}
 				}
 				response.Close();
-				var obj = JsonConvert.DeserializeObject<Response<Hotel>>(responseJson);
+				var obj = JsonConvert.DeserializeObject<Response<Country>>(responseJson);
 				return obj;
 			}).Result;
 			if (res.result == 200)
@@ -201,7 +286,6 @@ namespace Exam_NP_TravelAPI
 				MessageBox.Show($"HTTP server response: {res.result}");
 			}
 		}
-
 		private void AddCountryButton_Click(object sender, RoutedEventArgs e)
 		{
 			AddCountry addCountryWnd = new AddCountry();

@@ -168,10 +168,10 @@ namespace Exam_NP_TravelAPI
 					WebRequest request = WebRequest.Create(Api);
 					request.Method = "POST";
 					string param = "login";
-					string login = "markforest";
+					string login = signInWnd.Login;
 					//TODO hash password
-					//string md5 = CalculateMD5Hash(signInWnd.Password);
-					string md5 = "202cb962ac59075b964b07152d234b70";
+					string md5 = CalculateMD5Hash(signInWnd.Password);
+					//string md5 = "202cb962ac59075b964b07152d234b70";
 					string data = $"token={Token}&param={param}&login={login}&password={md5}";
 					byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
 					request.ContentType = "application/x-www-form-urlencoded";
@@ -194,8 +194,15 @@ namespace Exam_NP_TravelAPI
 				}).Result;
 				if (res.result == 200)
 				{
-					User = res.rows[0];
-					LoginTextBlock.Text = User.Login;
+					if (res.rows.Count == 0)
+					{
+						MessageBox.Show($"Not correct password!");
+					}
+					else
+					{
+						User = res.rows[0];
+						LoginTextBlock.Text = User.Login;
+					}
 				}
 				else
 				{
@@ -260,7 +267,7 @@ namespace Exam_NP_TravelAPI
 
 		private void ComboBoxCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			ComboBoxCities.Visibility = Visibility.Visible;
+			ComboBoxCities.IsEnabled = true;
 			ComboBoxCities.Items.Clear();
 			ListHotels.Visibility = Visibility.Hidden;
 			if (ComboBoxCountries.SelectedItem != null)
