@@ -26,6 +26,20 @@ namespace Exam_NP_TravelAPI
 		{
 			InitializeComponent();
 			SignInButton.Click += SignInButton_Click;
+			LoginTextBox.TextChanged += LoginTextBox_TextChanged;
+			PasswordTextBox.PasswordChanged += PasswordTextBox_PasswordChanged;
+			EmailTextBox.TextChanged += LoginTextBox_TextChanged;
+			SignInButton.IsEnabled = false;
+		}		
+
+		private void PasswordTextBox_PasswordChanged(object sender, RoutedEventArgs e)
+		{
+			SignInButton.IsEnabled = LoginTextBox.Text.Length > 0 && EmailTextBox.Text.Length > 0 && PasswordTextBox.Password.Length > 0;
+		}
+
+		private void LoginTextBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			SignInButton.IsEnabled = LoginTextBox.Text.Length > 0 && EmailTextBox.Text.Length > 0 && PasswordTextBox.Password.Length > 0;
 		}
 
 		private void SignInButton_Click(object sender, RoutedEventArgs e)

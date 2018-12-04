@@ -67,8 +67,14 @@
     <Compile Include="classes\City.cs" />
     <Compile Include="classes\Hotel.cs" />
     <Compile Include="classes\Response.cs" />
+    <Compile Include="windows\AddCity.xaml.cs">
+      <DependentUpon>AddCity.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\Admin.xaml.cs">
       <DependentUpon>Admin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\AddCountry.xaml.cs">
+      <DependentUpon>AddCountry.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
@@ -77,6 +83,10 @@
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\User.cs" />
+    <Page Include="windows\AddCity.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="windows\Admin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="windows\AddCountry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="windows\SignUp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

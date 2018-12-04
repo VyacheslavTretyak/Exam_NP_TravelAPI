@@ -95,6 +95,7 @@ namespace Exam_NP_TravelAPI
 			}
 			Admin adminWnd = new Admin(Api, Token);
 			adminWnd.ShowDialog();
+			LoadCountries();
 		}
 
 		private void SignUp()
@@ -260,9 +261,12 @@ namespace Exam_NP_TravelAPI
 		private void ComboBoxCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			ComboBoxCities.Visibility = Visibility.Visible;
-			ComboBoxCities.Items.Clear();		
+			ComboBoxCities.Items.Clear();
 			ListHotels.Visibility = Visibility.Hidden;
-			LoadCities((ComboBoxCountries.SelectedItem as Country).Id);
+			if (ComboBoxCountries.SelectedItem != null)
+			{
+				LoadCities((ComboBoxCountries.SelectedItem as Country).Id);
+			}
 		}
 
 		
@@ -295,6 +299,7 @@ namespace Exam_NP_TravelAPI
 			}).Result;
 			if (res.result == 200)
 			{
+				ComboBoxCities.Items.Clear();
 				foreach (var item in res.rows)
 				{					
 					ComboBoxCities.Items.Add(item as City);
@@ -334,6 +339,8 @@ namespace Exam_NP_TravelAPI
 			}).Result;		
 			if (res.result == 200)
 			{
+				ComboBoxCountries.Items.Clear();
+				ComboBoxCountries.SelectedItem = null;
 				foreach (var item in res.rows)
 				{					
 					ComboBoxCountries.Items.Add(item as Country);

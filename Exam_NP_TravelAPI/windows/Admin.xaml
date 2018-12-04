@@ -64,14 +64,23 @@
 					</GridView>
 				</ListView.View>
 			</ListView>
-			<Button Name="AddCountryButton"
-				Grid.Row="1"
-				Width="200"
-				HorizontalAlignment="Left"
-				Margin="16">
-				Add Country
-			</Button>
-			<ListView Name="ListCities"
+			<StackPanel Grid.Row="1"
+				Orientation="Horizontal">
+				<Button Name="AddCountryButton"					
+					Width="200"
+					HorizontalAlignment="Left"
+					Margin="16">
+							Add Country
+				</Button>
+				<Button Name="RemCountryButton"					
+					IsEnabled="False"
+					Width="200"
+					HorizontalAlignment="Left"
+					Margin="16">
+							Remove Country
+					</Button>
+					</StackPanel>
+					<ListView Name="ListCities"
 				Grid.Row="2"				
 				ItemsSource="{Binding Cities}">
 				<ListView.View>
@@ -88,13 +97,22 @@
 					</GridView>
 				</ListView.View>
 			</ListView>
-			<Button Name="AddCitiesButton"
-				Grid.Row="3"
-				Width="200"
-				HorizontalAlignment="Left"
-				Margin="16">
-				Add City
-			</Button>
+					<StackPanel Grid.Row="3"
+				Orientation="Horizontal">
+						<Button Name="AddCityButton"					
+					Width="200"
+					HorizontalAlignment="Left"
+					Margin="16">
+							Add City
+						</Button>
+						<Button Name="RemCityButton"					
+					IsEnabled="False"
+					Width="200"
+					HorizontalAlignment="Left"
+					Margin="16">
+							Remove City
+						</Button>
+					</StackPanel>					
 			<ListView Name="ListHotels"
 				Grid.Row="4"				
 				ItemsSource="{Binding Hotels}">				
@@ -124,13 +142,22 @@
 						</GridView>
 				</ListView.View>
 			</ListView>
-			<Button Name="AddHotelButton"
-				Grid.Row="5"
-				Width="200"
-				HorizontalAlignment="Left"
-				Margin="16">
-				Add Hotel
-			</Button>		
+					<StackPanel Grid.Row="5"
+				Orientation="Horizontal">
+						<Button Name="AddHotelButton"					
+					Width="200"
+					HorizontalAlignment="Left"
+					Margin="16">
+							Add Hotel
+						</Button>
+						<Button Name="RemHotelButton"					
+					IsEnabled="False"
+					Width="200"
+					HorizontalAlignment="Left"
+					Margin="16">
+							Remove Hotel
+						</Button>
+					</StackPanel>							
 			</Grid>
 		</ScrollViewer>
 		</Grid>

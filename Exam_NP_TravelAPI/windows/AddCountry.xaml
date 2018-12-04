@@ -1,0 +1,54 @@
+﻿<Window x:Class="Exam_NP_TravelAPI.AddCountry"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exam_NP_TravelAPI"
+        mc:Ignorable="d"
+		  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"  
+		Title="Add Country" Height="450" Width="417.899">
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition/>			
+			<RowDefinition/>			
+		</Grid.RowDefinitions>		
+		<materialDesign:ColorZone
+			Grid.Row="0"
+			Mode="PrimaryDark"
+			Padding="16">
+			<DockPanel>				
+				<StackPanel
+					Orientation="Horizontal">
+					<TextBlock FontSize="24"
+						VerticalAlignment="Center"
+						Margin="16 0 0 0">
+						Add Country
+					</TextBlock>
+				</StackPanel>
+			</DockPanel>
+		</materialDesign:ColorZone>
+		<TextBox x:Name="CountryNameTextBox"
+			Grid.Row="1"
+			Margin="16"
+			FontSize="24"
+			Height="50"
+			materialDesign:HintAssist.Hint="Country Name">			
+		</TextBox>		
+		<Button Name="SaveButton"
+			Grid.Row="3"
+			Width="200"
+			Height="50"
+			FontSize="24">
+			Save
+		</Button>
+			
+	</Grid>
+</Window>
